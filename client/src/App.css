@@ -1,6 +1,7 @@
 .App {
 	background-color: #282c34;
 	min-height: 100vh;
+	color: whitesmoke;
 }
 
 .nav {
@@ -22,6 +23,23 @@
 	color: whitesmoke;
 }
 
-.log {
-	font-size: 10rem;
+.register {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	/* font-size: 2rem; */
+}
+.register h1 {
+	font-size: 3rem;
+}
+.username {
+	width: 400px;
+	height: 30px;
+	margin-top: 20px;
+}
+
+button {
+	font-size: 2rem;
+	margin-top: 30px;
 }

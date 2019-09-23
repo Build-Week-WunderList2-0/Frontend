@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import { Route } from 'react-router-dom';
-import Signup from './components/Signup';
+import Signup from './components/forms/Signup';
+import Login from './components/forms/Login';
 import './App.css';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
                 */}
 				<Route exact path="/" />
 				<Route path="/signup" component={Signup} />
-				<Route path="/login" />
+				<Route path="/login" component={Login} />
 			</header>
 		</div>
 	);

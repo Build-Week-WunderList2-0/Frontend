@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 
-const Signup = ({ values, errors, touched, status }) => {
-	const [ user, setUser ] = useState([]);
 
+const Signup = ({ values, errors, touched, status }, props) => {
+	const [ user, setUser ] = useState({username: '', password: '' });
+   
 	useEffect(
 		() => {
+            // console.log(status)
 			if (status) {
-				setUser([ ...user, status ]);
-				// console.log(user);
+				setUser(status);
+				// console.log('Signup.js: useEffect', user);
 			}
 		},
 		[ status ]
 	);
-
+        
 	return (
 		<div className="register">
 			<h1>Sign Up</h1>
@@ -45,8 +47,9 @@ const FormikSignup = withFormik({
 		username: Yup.string().required('Username is required'),
 		password: Yup.string().required('Password is required')
 	}),
-	handleSubmit(values, { setStatus }) {
-		// console.log(values);
+	handleSubmit(values, props, { setStatus }) {
+        // console.log(values);
+        console.log('Signup/js: handleSubmit', props)
 		setStatus(values);
 	}
 })(Signup);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import { Route } from 'react-router-dom';
-import Signup from './components/Signup';
+import Signup from './components/forms/Signup';
 import './App.css';
 
 function App() {

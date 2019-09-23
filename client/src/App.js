@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './App.css';
 
+<<<<<<< HEAD
 class App extends Component {
   render() {
     return (
@@ -22,6 +23,16 @@ class App extends Component {
       </div>
     );
   }
+=======
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        
+      </header>
+    </div>
+  );
+>>>>>>> 2535c4b7c8548795f97a5bfbabad4153a08c04cb
 }
 
 export default App;

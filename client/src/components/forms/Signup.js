@@ -5,7 +5,7 @@ import {getUser} from '../actions/index'
 import * as Yup from 'yup';
 
 
-const Signup = ({ values, errors, touched, status }, props) => {
+const Signup = ({ values, errors, touched, status }) => {
 	const [ user, setUser ] = useState({username: '', password: '' });
    
 	useEffect(

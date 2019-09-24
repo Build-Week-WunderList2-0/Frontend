@@ -3,11 +3,11 @@ import Navbar from './components/Navbar/Navbar';
 import { Route } from 'react-router-dom';
 import Signup from './components/forms/Signup';
 import Login from './components/forms/Login';
+import CreateList from './components/forms/CreateList';
 
 import './App.css';
 
 function App() {
-	
 	return (
 		<div className="App">
 			<header className="App-header">
@@ -15,13 +15,12 @@ function App() {
 				{/*         @TODO:      
                             Add components
                 */}
-				<Route exact path="/" />
-				<Route path="/signup" render={(props) => <Signup{...props} getUser={props.getUser}/>} />
+				<Route exact path="/home" component={CreateList} />
+				<Route path="/signup" render={(props) => <Signup {...props} getUser={props.getUser} />} />
 				<Route path="/login" component={Login} />
 			</header>
 		</div>
 	);
 }
 
-
-export default App
+export default App;

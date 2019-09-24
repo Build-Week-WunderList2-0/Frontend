@@ -21,7 +21,6 @@ function App() {
                             Add components
 				*/}
 				<Switch>
-					<Route exact path="/home" component={CreateList} />
 					<Route 
 						path="/signup" 
 						render={(props) => <Signup {...props} 
@@ -32,7 +31,7 @@ function App() {
 						render={(props) => <Login {...props}
 						getLogin={props.getLogin} />}
 					/>
-					<PrivateRoute path='/home' component={CreateList} />
+					<PrivateRoute exact path='/home' component={CreateList} />
 				</Switch>
 			</header>
 		</div>

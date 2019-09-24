@@ -3,7 +3,7 @@ import axios from 'axios';
 export const FETCHING_MESSAGE_START = 'FETCHING_MESSAGE_START';
 export const FETCHING_MESSAGE_SUCCESS = 'FETCHING_MESSAGE_SUCCESS';
 export const FETCHING_MESSAGE_FAILURE = 'FETCHING_MESSAGE_FAILURE';
-
+//This runs in Login.js
 export const getLogin = (user) => dispatch => {
   console.log('LoginAction.js',user)
     dispatch({type: FETCHING_MESSAGE_START});

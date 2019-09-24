@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { connect } from 'react-redux'
-import {getUser} from '../actions/index'
-import * as Yup from 'yup';
 
+import * as Yup from 'yup';
+import {getUser} from '../actions/index'
 
 const Signup = ({ values, errors, touched, status }) => {
 	const [ user, setUser ] = useState({username: '', password: '' });
@@ -50,7 +50,7 @@ const FormikSignup = withFormik({
 		password: Yup.string().required('Password is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
-		props.getUser(values)
+        props.getUser(values).then(() => props.history.push('/login'))
 		setStatus(values);
 	}
 })(Signup);
@@ -58,7 +58,7 @@ const FormikSignup = withFormik({
 const mapStatetoProps = state => {
     // console.log(state.)
     return {
-
+        state
     }
 }
 export default connect(mapStatetoProps, {getUser} )(FormikSignup);

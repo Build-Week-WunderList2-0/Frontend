@@ -43,3 +43,30 @@ button {
 	font-size: 2rem;
 	margin-top: 30px;
 }
+
+.list-button {
+	font-size: 1rem;
+	margin: 0;
+}
+.list-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+.list-items {
+	display: flex;
+	flex-direction: column;
+	width: 10vw;
+	margin: 20px;
+	text-align: center;
+}
+.form {
+	display: flex;
+	flex-direction: column;
+	width: 50vw;
+	margin: 0 auto;
+	text-align: center;
+}
+.form button {
+	width: 200px;
+	margin: 0 auto;
+}

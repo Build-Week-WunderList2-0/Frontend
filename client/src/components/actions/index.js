@@ -10,7 +10,7 @@ export const getUser = (user) => dispatch => {
     axios
     .post('https://wunderlist2019.herokuapp.com/auth/register',user)
     .then(res =>{
-       console.log(res)
+       console.log('Actions: index.js', res)
       dispatch({type:FETCHING_MESSAGE_SUCCESS, payload: res.data.message})
     })
     .catch(err => {

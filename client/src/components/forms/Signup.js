@@ -4,19 +4,21 @@ import { connect } from 'react-redux'
 import {getUser} from '../actions/index'
 import * as Yup from 'yup';
 
-const Signup = ({ values, errors, touched, status }) => {
-	const [ user, setUser ] = useState([]);
 
+const Signup = ({ values, errors, touched, status }) => {
+	const [ user, setUser ] = useState({username: '', password: '' });
+   
 	useEffect(
 		() => {
+            // console.log(status)
 			if (status) {
-				setUser([ ...user, status ]);
-				// console.log(user);
+				setUser(status);
+				// console.log('Signup.js: useEffect', user);
 			}
 		},
 		[ status ]
 	);
-
+        
 	return (
 		<div className="register">
 			<h1>Sign Up</h1>

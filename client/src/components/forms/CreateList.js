@@ -20,6 +20,13 @@ const CreateList = ({ status }) => {
 	//     .push(input)
 	// }
 
+	function isDaily(item) {
+		return !item.month;
+	}
+	function isMonthly(item) {
+		return item.month;
+	}
+
 	return (
 		<div className="list">
 			Create List
@@ -39,7 +46,8 @@ const CreateList = ({ status }) => {
 				<button>Submit!</button>
 			</Form>
 			<div className="list-container">
-				{list.map((list) => (
+				<h1>Daily ToDo Lists: </h1>
+				{list.filter(isDaily).map((list) => (
 					<div className="list-items">
 						<p>Date: {list.date}</p>
 						<p>Title: {list.list}</p>
@@ -47,6 +55,19 @@ const CreateList = ({ status }) => {
 						<button className="list-button">List Complete!</button>
 					</div>
 				))}
+			</div>
+			<div className="list-container">
+				<h1>Monthly ToDoLists:</h1>
+				<div>
+					{list.filter(isMonthly).map((list) => (
+						<div className="list-items">
+							<p>Date: {list.date}</p>
+							<p>Title: {list.list}</p>
+							<ListItems />
+							<button className="list-button">List Complete!</button>
+						</div>
+					))}
+				</div>
 			</div>
 		</div>
 	);

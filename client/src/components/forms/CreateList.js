@@ -1,31 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-
+import ListItems from './ListItems';
+import '../../App.css';
 const CreateList = ({ status }) => {
-	const [ list, setList ] = useState([ { date: '09/24/2019', list: 'Todo...' } ]);
+	const [ list, setList ] = useState([ { date: '09/24/2019', list: 'Title' } ]);
 
 	useEffect(
 		() => {
 			if (status) {
 				setList([ ...list, status ]);
-				console.log(list);
+				console.log(list.id);
 			}
 		},
 		[ status ]
 	);
 
+	// function addTask(){
+	//     .push(input)
+	// }
+
 	return (
 		<div className="list">
 			Create List
-			<Form>
+			<Form className="form">
 				<div>
 					Date of list
 					<Field type="text" name="date" placeholder="mm/dd/yyyy" />
 				</div>
 				<div>
-					Create your list:
-					<Field component="textarea" type="text" name="list" placeholder="Todo..." />
+					Title:
+					<Field type="text" name="list" placeholder="Title" />
 				</div>
 				Do you want this list to be scheduled weekly?
 				<Field type="checkbox" name="week" />
@@ -33,30 +38,33 @@ const CreateList = ({ status }) => {
 				<Field type="checkbox" name="month" />
 				<button>Submit!</button>
 			</Form>
-			{list.map((list) => (
-				<div>
-					<p>Date: {list.date}</p>
-					<p>list: {list.list}</p>
-					<button className="list-button">Edit</button>
-					<button className="list-button">Complete!</button>
-				</div>
-			))}
+			<div className="list-container">
+				{list.map((list) => (
+					<div className="list-items">
+						<p>Date: {list.date}</p>
+						<p>Title: {list.list}</p>
+						<ListItems />
+						<button className="list-button">List Complete!</button>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
 
 const FormikCreate = withFormik({
-	mapPropsToValues({ date, list, week, month }) {
+	mapPropsToValues({ date, list, week, month, id }) {
 		return {
+			id: { id },
 			date: date || '',
-			list: list || '',
+			list: list,
 			week: week || false,
 			month: month || false
 		};
 	},
 	validationSchema: Yup.object().shape({
-		date: Yup.string().required('Username is required'),
-		list: Yup.string().required('Password is required')
+		date: Yup.string().required('date is required'),
+		list: Yup.string().required('list is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
 		// props.getUser(values);

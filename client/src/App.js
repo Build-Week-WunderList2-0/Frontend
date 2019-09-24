@@ -3,12 +3,11 @@ import Navbar from './components/Navbar/Navbar';
 import { Route } from 'react-router-dom';
 import Signup from './components/forms/Signup';
 import Login from './components/forms/Login';
+
 import './App.css';
 import { connect } from 'react-redux';
 
-import {getUser} from './components/actions/index.js'
-
-function App(props) {
+function App() {
 	
 	return (
 		
@@ -27,10 +26,5 @@ function App(props) {
 	);
 }
 
-const mapStatetoProps = state => {
-    // console.log(state.)
-    return {
 
-    }
-}
-export default connect(mapStatetoProps, {getUser})(App);
+export default App

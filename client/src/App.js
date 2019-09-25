@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Signup from './components/forms/Signup';
 import Login from './components/forms/Login';
 import CreateList from './components/forms/CreateList';
-import PrivateRoute from './components/routes/PrivateRoute'
+import PrivateRoute from './routes/PrivateRoute.js';
 
 import './App.css';
 

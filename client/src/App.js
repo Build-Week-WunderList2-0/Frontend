@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './components/Navbar';
 import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Signup from './components/Signup';
 import SearchForm from './components/SearchForm';
@@ -30,4 +31,11 @@ function App() {
 	);
 }
 
-export default App;
+const mapStatetoProps = state => {
+    console.log('App.js', state)
+    return {
+        // state
+    }
+}
+export default connect(mapStatetoProps, {})(App);
+

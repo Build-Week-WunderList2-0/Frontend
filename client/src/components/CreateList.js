@@ -131,11 +131,13 @@ const FormikCreate = withFormik({
 		title: Yup.string().required('list is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
-		console.log(values);
+		// props.getUser(values);
+		// https://wunderlist2019.herokuapp.com/tasks/
 		axiosWithAuth()
 			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
 			.then((response) => {
-				console.log('post response', response);
+				console.log('CreateList.js: handleSubmit: post response', response);
+				localStorage.setItem('token', response.data.payload);
 			})
 			.catch((error) => console.log(error.response));
 		setStatus(values);

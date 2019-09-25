@@ -3,9 +3,10 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ListItems from './ListItems';
 import '../App.css';
-import axios from 'axios';
+// import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 const CreateList = ({ status }) => {
-	const [ list, setList ] = useState([ { date: '09/24/2019', list: 'Title' } ]);
+	const [ list, setList ] = useState([ { date: '09/24/2019', title: 'Title', monthly: false } ]);
 
 	useEffect(
 		() => {
@@ -22,10 +23,10 @@ const CreateList = ({ status }) => {
 	// }
 
 	function isDaily(item) {
-		return !item.month;
+		return !item.monthly;
 	}
 	function isMonthly(item) {
-		return item.month;
+		return item.monthly;
 	}
 
 	return (
@@ -38,12 +39,12 @@ const CreateList = ({ status }) => {
 				</div>
 				<div>
 					Title:
-					<Field type="text" name="list" placeholder="Title" />
+					<Field type="text" name="title" placeholder="Title" />
 				</div>
 				Do you want this list to be scheduled weekly?
-				<Field type="checkbox" name="week" />
+				<Field type="checkbox" name="weekly" />
 				Do you want this list to be scheduled monthly?
-				<Field type="checkbox" name="month" />
+				<Field type="checkbox" name="monthly" />
 				<button>Submit!</button>
 			</Form>
 			<div className="list-container">
@@ -51,7 +52,7 @@ const CreateList = ({ status }) => {
 				{list.filter(isDaily).map((list) => (
 					<div className="list-items">
 						<p>Date: {list.date}</p>
-						<p>Title: {list.list}</p>
+						<p>Title: {list.title}</p>
 						<ListItems />
 						<button className="list-button">List Complete!</button>
 					</div>
@@ -63,7 +64,7 @@ const CreateList = ({ status }) => {
 					{list.filter(isMonthly).map((list) => (
 						<div className="list-items">
 							<p>Date: {list.date}</p>
-							<p>Title: {list.list}</p>
+							<p>Title: {list.title}</p>
 							<ListItems />
 							<button className="list-button">List Complete!</button>
 						</div>
@@ -75,13 +76,13 @@ const CreateList = ({ status }) => {
 };
 
 const FormikCreate = withFormik({
-	mapPropsToValues({ date, list, week, month, id }) {
+	mapPropsToValues({ date, title, monthly, id, weekly }) {
 		return {
 			id: { id },
 			date: date || '',
-			list: list,
-			week: week || false,
-			month: month || false
+			title: title,
+			monthly: monthly || false,
+			weekly: weekly || false
 		};
 	},
 	validationSchema: Yup.object().shape({
@@ -89,15 +90,16 @@ const FormikCreate = withFormik({
 		list: Yup.string().required('list is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
+		console.log(values);
 		// props.getUser(values);
 		// https://wunderlist2019.herokuapp.com/tasks/
-		axios
-			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
-			.then((response) => {
-				console.log('post respone', response);
-			})
-			.catch((error) => console.log(error.response));
-		// setStatus(values);
+		// axiosWithAuth()
+		// 	.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
+		// 	.then((response) => {
+		// 		console.log('post respone', response);
+		// 	})
+		// 	.catch((error) => console.log(error.response));
+		//setStatus(values);
 	}
 })(CreateList);
 

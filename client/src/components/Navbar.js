@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => {
 	return (
 		<div className="nav">
-			<h1>WunderList 2.0</h1>
+			<img src={require('../images/logo.png')} />
 			<div className="links">
 				<Link to="/signup" className="links">
 					Sign Up

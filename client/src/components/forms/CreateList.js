@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ListItems from './ListItems';
+import { Link } from 'react-router-dom';
 import '../../App.css';
 const CreateList = ({ status }) => {
 	const [ list, setList ] = useState([ { date: '09/24/2019', list: 'Title' } ]);
@@ -44,6 +45,9 @@ const CreateList = ({ status }) => {
 				Do you want this list to be scheduled monthly?
 				<Field type="checkbox" name="month" />
 				<button>Submit!</button>
+				<Link to="/search" className="links">
+					Search
+				</Link>
 			</Form>
 			<div className="list-container">
 				<h1>Daily ToDo Lists: </h1>

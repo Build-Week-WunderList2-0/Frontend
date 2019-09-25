@@ -1,4 +1,4 @@
-// import { FETCHING_MESSAGE_SUCCESS } from "../actions";
+import { FETCHING_MESSAGE_SUCCESS } from "../../actions/LoginAction";
 
 const initialState = {
   'smurfs': [
@@ -12,12 +12,14 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch(action.type) {
-    // case FETCHING_MESSAGE_SUCCESS:
-    //   return {
-    //     ...state,
-    //     smurfs: action.payload
-    //   }
+    case FETCHING_MESSAGE_SUCCESS:
+      return{
+        ...state,
+        message: action.payload,
+        status: '',
+        error: ''
+      }
     default:
-        return state;
+      return state;
   }
 } 

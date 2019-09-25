@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './components/Navbar';
 import { Route, Switch } from 'react-router-dom';
 
-import Signup from './components/forms/Signup';
-import Login from './components/forms/Login';
-import CreateList from './components/forms/CreateList';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import CreateList from './components/CreateList';
 import PrivateRoute from './routes/PrivateRoute.js';
 
 import './App.css';
 
-
 function App() {
 	return (
-		
 		<div className="App">
 			{/* {console.log('App.js: props', props)} */}
 			<header className="App-header">
@@ -21,17 +19,9 @@ function App() {
                             Add components
 				*/}
 				<Switch>
-					<Route 
-						path="/signup" 
-						render={(props) => <Signup {...props} 
-						getUser={props.getUser} />} 
-					/>
-					<Route 
-						path="/login"  
-						render={(props) => <Login {...props}
-						getLogin={props.getLogin} />}
-					/>
-					<PrivateRoute exact path='/home' component={CreateList} />
+					<Route path="/signup" render={(props) => <Signup {...props} getUser={props.getUser} />} />
+					<Route path="/login" render={(props) => <Login {...props} getLogin={props.getLogin} />} />
+					<PrivateRoute exact path="/home" component={CreateList} />
 				</Switch>
 			</header>
 		</div>

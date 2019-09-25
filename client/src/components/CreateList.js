@@ -2,21 +2,56 @@ import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ListItems from './ListItems';
+import { Link } from 'react-router-dom';
 import '../App.css';
 // import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
+import SearchForm from './SearchForm';
+
 const CreateList = ({ status }) => {
-	const [ list, setList ] = useState([ { date: '09/24/2019', title: 'Title', monthly: false } ]);
+	const [ list, setList ] = useState([ { due_by: '09/24/2019', title: 'Title', monthly: false } ]);
+
+	useEffect(() => {
+		axiosWithAuth()
+			.get(`https://wunderlist2019.herokuapp.com/tasks/all`)
+			.then((response) => {
+				console.log(response);
+				response.data.map((item) => {
+					console.log('item', item);
+					// setList([ ...list, item ]);
+					setList([ ...list, item ]);
+				});
+
+				//setStatus(response.data);
+			})
+			.catch((error) => {
+				console.log('the data was not displayed', error);
+			});
+	}, []);
 
 	useEffect(
 		() => {
 			if (status) {
 				setList([ ...list, status ]);
-				console.log(list.id);
+				console.log('Our list', list);
 			}
 		},
 		[ status ]
 	);
+
+	// useEffect(() => {
+	// 	axiosWithAuth()
+	// 		.get(`https://wunderlist2019.herokuapp.com/tasks/all`)
+	// 		.then((response) => {
+	// 			console.log('data', response.data);
+	// 			setList([ ...list, response.data ]);
+
+	// 			//setStatus(response.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.log('the data was not displayed', error);
+	// 		});
+	// }, []);
 
 	// function addTask(){
 	//     .push(input)
@@ -31,11 +66,14 @@ const CreateList = ({ status }) => {
 
 	return (
 		<div className="list">
+			<Link to="/search" className="links">
+				Search
+			</Link>
 			Create List
 			<Form className="form">
 				<div>
 					Date of list
-					<Field type="text" name="date" placeholder="mm/dd/yyyy" />
+					<Field type="text" name="due_by" placeholder="mm/dd/yyyy" />
 				</div>
 				<div>
 					Title:
@@ -51,7 +89,7 @@ const CreateList = ({ status }) => {
 				<h1>Daily ToDo Lists: </h1>
 				{list.filter(isDaily).map((list) => (
 					<div className="list-items">
-						<p>Date: {list.date}</p>
+						<p>Date: {list.due_by}</p>
 						<p>Title: {list.title}</p>
 						<ListItems />
 						<button className="list-button">List Complete!</button>
@@ -63,7 +101,7 @@ const CreateList = ({ status }) => {
 				<div>
 					{list.filter(isMonthly).map((list) => (
 						<div className="list-items">
-							<p>Date: {list.date}</p>
+							<p>Date: {list.due_by}</p>
 							<p>Title: {list.title}</p>
 							<ListItems />
 							<button className="list-button">List Complete!</button>
@@ -76,30 +114,31 @@ const CreateList = ({ status }) => {
 };
 
 const FormikCreate = withFormik({
-	mapPropsToValues({ date, title, monthly, id, weekly }) {
+	mapPropsToValues({ due_by, title, monthly, weekly, completed, user_id, description, segment }) {
 		return {
-			id: { id },
-			date: date || '',
+			user_id: user_id || '1',
+			due_by: due_by || '',
 			title: title,
+			weekly: weekly || false,
 			monthly: monthly || false,
-			weekly: weekly || false
+			completed: completed || false,
+			description: description || 'none',
+			segment: segment || 'none'
 		};
 	},
 	validationSchema: Yup.object().shape({
-		date: Yup.string().required('date is required'),
-		list: Yup.string().required('list is required')
+		due_by: Yup.string().required('date is required'),
+		title: Yup.string().required('list is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
 		console.log(values);
-		// props.getUser(values);
-		// https://wunderlist2019.herokuapp.com/tasks/
-		// axiosWithAuth()
-		// 	.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
-		// 	.then((response) => {
-		// 		console.log('post respone', response);
-		// 	})
-		// 	.catch((error) => console.log(error.response));
-		//setStatus(values);
+		axiosWithAuth()
+			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
+			.then((response) => {
+				console.log('post response', response);
+			})
+			.catch((error) => console.log(error.response));
+		setStatus(values);
 	}
 })(CreateList);
 

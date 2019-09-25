@@ -56,7 +56,7 @@ const FormikSignup = withFormik({
 })(Signup);
 
 const mapStatetoProps = state => {
-    // console.log(state.)
+    console.log(state)
     return {
         state
     }

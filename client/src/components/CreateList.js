@@ -3,7 +3,8 @@ import { withFormik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import ListItems from './ListItems';
 import '../App.css';
-import axios from 'axios';
+// import axios from 'axios';
+import {axiosWithAuth} from '../utils/axiosWithAuth';
 const CreateList = ({ status }) => {
 	const [ list, setList ] = useState([ { date: '09/24/2019', list: 'Title' } ]);
 
@@ -91,10 +92,11 @@ const FormikCreate = withFormik({
 	handleSubmit(values, { setStatus, props }) {
 		// props.getUser(values);
 		// https://wunderlist2019.herokuapp.com/tasks/
-		axios
+		axiosWithAuth()
 			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
 			.then((response) => {
-				console.log('post respone', response);
+				console.log('CreateList.js: handleSubmit: post response', response);
+				localStorage.setItem('token', response.data.payload)
 			})
 			.catch((error) => console.log(error.response));
 		// setStatus(values);

@@ -89,7 +89,7 @@ const FormikSearchForm = withFormik({
 				//setStatus(response.data);
 			})
 			.catch((error) => {
-				console.log('the data was not displayed', error);
+				console.log('SearchForm: handleSubmit: the data was not displayed', error);
 			});
 	}
 })(SearchForm);

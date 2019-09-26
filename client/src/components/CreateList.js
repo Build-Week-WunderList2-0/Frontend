@@ -10,17 +10,41 @@ import SearchForm from './SearchForm';
 
 const CreateList = ({ status }) => {
 	const [ list, setList ] = useState([ { due_by: '09/24/2019', title: 'Title', monthly: false } ]);
+	// const [editing, setEditing] = useState(false)
+	// const [itemToEdit, setItemToEdit] = useState()
 	
+	// const editItem = item => {
+	// 	setEditing(true);
+	// }
+
+	// const saveEdit = e => {
+	// 	e.preventDefault();
+	// 	axiosWithAuth()
+	// 	  .put(`/tasks/update/${}`, itemToEdit)
+	// 	  .then(res => {
+	// 		 // console.log(res)
+	// 		setEditing(false)
+	// 	  })
+	// 	  .catch(err =>console.log(err))
+		
+	// };
 	
+	//   const deleteColor = color => {
+	// 	// make a delete request to delete this color
+	// 	axiosWithAuth()
+	// 	  .delete(`/colors/${color.id}`)
+	// 	  .then(res => console.log(res))
+	// 	  .catch(err => console.log(err))
+	// };
 
 	useEffect(() => {
 		axiosWithAuth()
 		
 			.get("https://wunderlist2019.herokuapp.com/tasks/",)
 			.then((response) => {
-				console.log(response);
+				console.log('CreateList.js: useEffect: axiosWithAuth:', response);
 				response.data.map((item) => {
-					console.log('item', item);
+					console.log('CreateList.js: useEffect: axiosWithAuth: response: item', item);
 					// setList([ ...list, item ]);
 					setList([ ...list, item ]);
 				});
@@ -82,10 +106,15 @@ const CreateList = ({ status }) => {
 					Title:
 					<Field type="text" name="title" placeholder="Title" />
 				</div>
-				Do you want this list to be scheduled weekly?
-				<Field type="checkbox" name="weekly" />
-				Do you want this list to be scheduled monthly?
-				<Field type="checkbox" name="monthly" />
+				<div>
+					Do you want this list to be scheduled weekly?
+					<Field type="checkbox" name="weekly" />
+				</div>
+				<div>
+					Do you want this list to be scheduled monthly?
+					<Field type="checkbox" name="monthly" />
+				</div>
+			
 				<button>Submit!</button>
 			</Form>
 			<div className="list-container">
@@ -118,8 +147,9 @@ const CreateList = ({ status }) => {
 
 const FormikCreate = withFormik({
 	mapPropsToValues({ due_by, title, monthly, weekly, completed, user_id, description, segment }) {
+		// console.log('mapPropsToValues',mapPropsToValues)
 		return {
-			user_id: user_id || '1',
+			user_id: user_id || '',
 			due_by: due_by || '',
 			title: title,
 			weekly: weekly || false,
@@ -141,6 +171,7 @@ const FormikCreate = withFormik({
 			.then((response) => {
 				console.log('CreateList.js: handleSubmit: post response', response);
 				localStorage.setItem('token', response.data.payload);
+
 			})
 			.catch((error) => console.log(error.response));
 		setStatus(values);

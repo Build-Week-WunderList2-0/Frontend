@@ -10,10 +10,13 @@ import SearchForm from './SearchForm';
 
 const CreateList = ({ status }) => {
 	const [ list, setList ] = useState([ { due_by: '09/24/2019', title: 'Title', monthly: false } ]);
+	
+	
 
 	useEffect(() => {
 		axiosWithAuth()
-			.get(`https://wunderlist2019.herokuapp.com/tasks/all`)
+		
+			.get("https://wunderlist2019.herokuapp.com/tasks/",)
 			.then((response) => {
 				console.log(response);
 				response.data.map((item) => {

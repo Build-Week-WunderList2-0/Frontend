@@ -1,26 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { withFormik, Form, Field } from 'formik';
 import { connect } from 'react-redux'
+
 import * as Yup from 'yup';
+import {getUser} from '../actions/index'
 
-import {getLogin} from '../actions/LoginAction.js'
-
-const Login = ({ values, errors, touched, status }) => {
-	const [ user, setUser ] = useState([]);
-
+const Signup = ({ values, errors, touched, status }) => {
+	const [ user, setUser ] = useState({username: '', password: '' });
+   
 	useEffect(
 		() => {
+            // console.log(status)
 			if (status) {
-				setUser([ ...user, status ]);
-				// console.log(user);
+				setUser(status);
+				// console.log('Signup.js: useEffect', user);
 			}
 		},
 		[ status ]
 	);
-
+        
 	return (
 		<div className="register">
-			<h1>Log In</h1>
+			<h1>Sign Up</h1>
 			<Form>
 				<div>
 					{touched.username && errors.username && <p>{errors.username}</p>}
@@ -37,7 +38,7 @@ const Login = ({ values, errors, touched, status }) => {
 	);
 };
 
-const FormikLogin = withFormik({
+const FormikSignup = withFormik({
 	mapPropsToValues({ username, password }) {
 		return {
 			username: username || '',
@@ -49,14 +50,16 @@ const FormikLogin = withFormik({
 		password: Yup.string().required('Password is required')
 	}),
 	handleSubmit(values, { setStatus, props }) {
-		// console.log(values);
-		props.getLogin(values).then(() => props.history.push('/home'))
+        props.getUser(values)
 		setStatus(values);
 	}
-})(Login);
-const mapStateToProps = state => {
-	return(
-		state
-	)
+})(Signup);
+
+const mapStatetoProps = state => {
+    console.log('Signup.js: mSTP:', state)
+    return {
+        state
+    }
 }
-export default connect(mapStateToProps, {getLogin}) (FormikLogin);
+export default connect(mapStatetoProps, {getUser} )(FormikSignup);
+

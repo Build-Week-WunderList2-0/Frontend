@@ -32,7 +32,7 @@ function App() {
 }
 
 const mapStatetoProps = state => {
-    console.log('App.js', state)
+    console.log('App.js: mSTP:', state)
     return {
         // state
     }

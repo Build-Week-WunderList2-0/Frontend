@@ -6,6 +6,7 @@ repo for React Devs
 [Wunderlist](https://romantic-austin-d557d1.netlify.com/) is an easy to use todo app where you can create, edit and delete your tasks as needed. 
 
 # Features
+You can add, edit, update and delete the tasks/items you created.
 
 # FrameWork
 We are currently using:

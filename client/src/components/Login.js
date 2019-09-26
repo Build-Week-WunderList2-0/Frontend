@@ -50,9 +50,9 @@ const FormikLogin = withFormik({
 	}),
 	handleSubmit(values, { setStatus, props }) {
 		// console.log(values);
-		props.getLogin(values).then(() => props.history.push('/home'))
+		props.getLogin(values).then(()=> { props.history.push('/home')})
 		setStatus(values);
-	}
+	} 
 })(Login);
 const mapStateToProps = state => {
 	return(

@@ -1,2 +1,3 @@
+![Image of Wunderlist](client/src/images/logo.png)
 # Frontend
-repo for React Devs ![Image of Wunderlist](client/src/images/logo.png)
+repo for React Devs 

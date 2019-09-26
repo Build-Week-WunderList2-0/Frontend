@@ -52,7 +52,7 @@ const FormikLogin = withFormik({
 		// console.log(values);
 		props.getLogin(values).then(()=> { props.history.push('/home')})
 		setStatus(values);
-	}
+	} 
 })(Login);
 const mapStateToProps = state => {
 	return(

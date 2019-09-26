@@ -13,6 +13,7 @@ export const getLogin = (user) => dispatch => {
     .then(res =>{
        console.log('Actions: loginAction.js', res)
        localStorage.setItem('token', res.data.token)
+       localStorage.setItem('userID', res.data.user_id)
       dispatch({type:FETCHING_MESSAGE_SUCCESS, payload: res.data.message})
     })
     .catch(err => {

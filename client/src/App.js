@@ -34,7 +34,7 @@ function App() {
 const mapStatetoProps = state => {
     console.log('App.js: mSTP:', state)
     return {
-        // state
+        userId: state.userId
     }
 }
 export default connect(mapStatetoProps, {})(App);

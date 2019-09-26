@@ -22,4 +22,4 @@ We are currently using:
 Our target audience is for anyone at any age who wants/needs to become more organized.
 
 # Planning Documentation
-To see how we planned out this app, please visit our planning docs [page] (https://docs.google.com/document/d/1U6Oosl6X26EBSKHZNxwZDw0FReQmspPZ8vbFYZYtxMo/edit?usp=sharing)
+To see how we planned out this app, please visit our planning docs [page](https://docs.google.com/document/d/1U6Oosl6X26EBSKHZNxwZDw0FReQmspPZ8vbFYZYtxMo/edit?usp=sharing).

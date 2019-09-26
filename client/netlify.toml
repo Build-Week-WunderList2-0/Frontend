@@ -7,7 +7,7 @@ ID = "5fe7fd67-6c0a-4cb7-8aeb-9645f8543188"
 
 [build]
   # This is the directory to change to before starting a build.
-  base    = "cilent/"
+  base    = "client/"
   # NOTE: This is where we will look for package.json/.nvmrc/etc, not root.
   # This is the directory that you are publishing from (relative to root of your repo)
   publish = "client/build/"

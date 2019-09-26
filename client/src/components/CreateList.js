@@ -67,16 +67,16 @@ const CreateList = ({ status }) => {
 	return (
 		<div className="list">
 			<Link to="/search" className="links">
-				Search
+				<h3>Search</h3>
 			</Link>
-			Create List
+			<h1>Create List:</h1>
 			<Form className="form">
 				<div>
-					Date of list
+					<h4>Date of list:</h4>
 					<Field type="text" name="due_by" placeholder="mm/dd/yyyy" />
 				</div>
 				<div>
-					Title:
+					<h4>Title:</h4>
 					<Field type="text" name="title" placeholder="Title" />
 				</div>
 				Do you want this list to be scheduled weekly?
@@ -86,7 +86,7 @@ const CreateList = ({ status }) => {
 				<button>Submit!</button>
 			</Form>
 			<div className="list-container">
-				<h1>Daily ToDo Lists: </h1>
+				<h1>Daily ToDo Lists:</h1>
 				{list.filter(isDaily).map((list) => (
 					<div className="list-items">
 						<p>Date: {list.due_by}</p>

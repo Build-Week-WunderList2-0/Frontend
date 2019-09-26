@@ -7,7 +7,7 @@ export const FETCHING_MESSAGE_FAILURE = 'FETCHING_MESSAGE_FAILURE';
 export const getUser = (user) => dispatch => {
   console.log('actions: index.js: getUser',user)
     dispatch({type: FETCHING_MESSAGE_START});
-     axios
+      return axios
     .post('https://wunderlist2019.herokuapp.com/auth/register',user)
     .then(res =>{
        console.log('Actions: index.js', res)

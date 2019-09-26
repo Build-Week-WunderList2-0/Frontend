@@ -8,11 +8,12 @@ export const getLogin = (user) => dispatch => {
   console.log('LoginAction.js',user)
     dispatch({type: FETCHING_MESSAGE_START});
     
-   axios
+    return axios
     .post('https://wunderlist2019.herokuapp.com/auth/login', user)
     .then(res =>{
        console.log('Actions: loginAction.js', res)
        localStorage.setItem('token', res.data.token)
+       localStorage.setItem('userID', res.data.user_id)
       dispatch({type:FETCHING_MESSAGE_SUCCESS, payload: res.data.message})
     })
     .catch(err => {

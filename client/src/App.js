@@ -1,27 +1,41 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import Navbar from './components/Navbar';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import Signup from './components/Signup';
+import SearchForm from './components/SearchForm';
+import Login from './components/Login';
+import CreateList from './components/CreateList';
+import PrivateRoute from './routes/PrivateRoute.js';
+
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+function App() {
+	return (
+		<div className="App">
+			{/* {console.log('App.js: props', props)} */}
+			<header className="App-header">
+				<Navbar />
+				{/*         @TODO:      
+                            Add components
+				*/}
+				<Switch>
+					<Route path="/signup" render={(props) => <Signup {...props} getUser={props.getUser} />} />
+					<Route path="/login" render={(props) => <Login {...props} getLogin={props.getLogin} />} />
+					<Route path="/search" component={SearchForm} />
+					<PrivateRoute exact path="/home" component={CreateList} />
+				</Switch>
+			</header>
+		</div>
+	);
 }
 
-export default App;
+const mapStatetoProps = state => {
+    console.log('App.js', state)
+    return {
+        // state
+    }
+}
+export default connect(mapStatetoProps, {})(App);
+

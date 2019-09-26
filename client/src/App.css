@@ -98,7 +98,8 @@ button {
 
 .list-container h1 {
   color: #db4c3f;
-   
+  margin-right: 15px;
+  margin-left: 15px;
 }
 
 .list-items {

@@ -98,13 +98,14 @@ button {
 
 .list-container h1 {
   color: #db4c3f;
+   
 }
 
 .list-items {
 	display: flex;
 	flex-direction: column;
 	width: 10vw;
-	margin: 20px;
+	margin: 15px 15px;
   text-align: center;
   background:#f3f3f3;
   min-width: 300px;

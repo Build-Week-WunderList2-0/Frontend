@@ -21,7 +21,6 @@ const CreateList = ({ status }) => {
 				console.log(response);
 				response.data.map((item) => {
 					console.log('item', item);
-					// setList([ ...list, item ]);
 					setList([ ...list, item ]);
 				});
 
@@ -100,7 +99,7 @@ const CreateList = ({ status }) => {
 				))}
 			</div>
 			<div className="list-container">
-				<h1>Monthly ToDoLists:</h1>
+				<h1>Month ToDo Lists:</h1>
 				<div>
 					{list.filter(isMonthly).map((list) => (
 						<div className="list-items">

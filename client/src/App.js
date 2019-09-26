@@ -1,27 +1,41 @@
 import React, { Component } from 'react';
-import Navbar from './components/Navbar/Navbar';
-import { Route } from 'react-router-dom';
-import Signup from './components/forms/Signup';
-import Login from './components/forms/Login';
+import Navbar from './components/Navbar';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import Signup from './components/Signup';
+import SearchForm from './components/SearchForm';
+import Login from './components/Login';
+import CreateList from './components/CreateList';
+import PrivateRoute from './routes/PrivateRoute.js';
 
 import './App.css';
 
 function App() {
-	
 	return (
 		<div className="App">
+			{/* {console.log('App.js: props', props)} */}
 			<header className="App-header">
 				<Navbar />
 				{/*         @TODO:      
                             Add components
-                */}
-				<Route exact path="/" />
-				<Route path="/signup" render={(props) => <Signup{...props} getUser={props.getUser}/>} />
-				<Route path="/login" component={Login} />
+				*/}
+				<Switch>
+					<Route path="/signup" render={(props) => <Signup {...props} getUser={props.getUser} />} />
+					<Route path="/login" render={(props) => <Login {...props} getLogin={props.getLogin} />} />
+					<Route path="/search" component={SearchForm} />
+					<PrivateRoute exact path="/home" component={CreateList} />
+				</Switch>
 			</header>
 		</div>
 	);
 }
 
+const mapStatetoProps = state => {
+    console.log('App.js', state)
+    return {
+        // state
+    }
+}
+export default connect(mapStatetoProps, {})(App);
 
-export default App

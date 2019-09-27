@@ -7,9 +7,11 @@ import '../App.css';
 // import axios from 'axios';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import SearchForm from './SearchForm';
+import TodoForm from './TodoForm'
+// import ListItems from './ListItems'
 
 const CreateList = ({ status }) => {
-	const [ list, setList ] = useState([ { due_by: '09/24/2019', title: 'Title', monthly: false } ]);
+	const [ list, setList ] = useState([ ]);
 	
 	
 
@@ -19,11 +21,7 @@ const CreateList = ({ status }) => {
 			.get("https://wunderlist2019.herokuapp.com/tasks/",)
 			.then((response) => {
 				console.log(response);
-				response.data.map((item) => {
-					console.log('item', item);
-					// setList([ ...list, item ]);
-					setList([ ...list, item ]);
-				});
+				setList(response.data)
 
 				//setStatus(response.data);
 			})
@@ -32,15 +30,17 @@ const CreateList = ({ status }) => {
 			});
 	}, []);
 
-	useEffect(
-		() => {
-			if (status) {
-				setList([ ...list, status ]);
-				console.log('Our list', list);
-			}
-		},
-		[ status ]
-	);
+	console.log(list)
+
+	// useEffect(
+	// 	() => {
+	// 		if (status) {
+	// 			setList([ ...list, status ]);
+	// 			console.log('Our list', list);
+	// 		}
+	// 	},
+	// 	[ status ]
+	// );
 
 	// useEffect(() => {
 	// 	axiosWithAuth()
@@ -60,19 +60,29 @@ const CreateList = ({ status }) => {
 	//     .push(input)
 	// }
 
-	function isDaily(item) {
-		return !item.monthly;
-	}
-	function isMonthly(item) {
-		return item.monthly;
-	}
+	// function isDaily(item) {
+	// 	return !item.monthly;
+	// }
+	// function isMonthly(item) {
+	// 	return item.monthly;
+	// }
 
 	return (
-		<div className="list">
-			<Link to="/search" className="links">
+
+		
+		<div className ="list-container">
+			<div>
+			<ListItems listitems={list} />
+		
+			</div>
+
+			{/* <Link to="/search" className="links">
 				Search
-			</Link>
-			Create List
+			</Link> */}
+			
+			
+			
+			{/* Create List
 			<Form className="form">
 				<div>
 					Date of list
@@ -87,8 +97,9 @@ const CreateList = ({ status }) => {
 				Do you want this list to be scheduled monthly?
 				<Field type="checkbox" name="monthly" />
 				<button>Submit!</button>
-			</Form>
-			<div className="list-container">
+			</Form> */}
+			
+			{/* <div className="list-container">
 				<h1>Daily ToDo Lists: </h1>
 				{list.filter(isDaily).map((list) => (
 					<div className="list-items">
@@ -99,8 +110,8 @@ const CreateList = ({ status }) => {
 					</div>
 				))}
 			</div>
-			<div className="list-container">
-				<h1>Monthly ToDoLists:</h1>
+			<div className="list-container"> */}
+				{/* <h1>Monthly ToDoLists:</h1>
 				<div>
 					{list.filter(isMonthly).map((list) => (
 						<div className="list-items">
@@ -111,40 +122,40 @@ const CreateList = ({ status }) => {
 						</div>
 					))}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
 
-const FormikCreate = withFormik({
-	mapPropsToValues({ due_by, title, monthly, weekly, completed, user_id, description, segment }) {
-		return {
-			user_id: user_id || '1',
-			due_by: due_by || '',
-			title: title,
-			weekly: weekly || false,
-			monthly: monthly || false,
-			completed: completed || false,
-			description: description || 'none',
-			segment: segment || 'none'
-		};
-	},
-	validationSchema: Yup.object().shape({
-		due_by: Yup.string().required('date is required'),
-		title: Yup.string().required('list is required')
-	}),
-	handleSubmit(values, { setStatus, props }) {
-		// props.getUser(values);
-		// https://wunderlist2019.herokuapp.com/tasks/
-		axiosWithAuth()
-			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
-			.then((response) => {
-				console.log('CreateList.js: handleSubmit: post response', response);
-				localStorage.setItem('token', response.data.payload);
-			})
-			.catch((error) => console.log(error.response));
-		setStatus(values);
-	}
-})(CreateList);
+// const FormikCreate = withFormik({
+// 	mapPropsToValues({ due_by, title, monthly, weekly, completed, user_id, description, segment }) {
+// 		return {
+// 			user_id: user_id || '1',
+// 			due_by: due_by || '',
+// 			title: title,
+// 			weekly: weekly || false,
+// 			monthly: monthly || false,
+// 			completed: completed || false,
+// 			description: description || 'none',
+// 			segment: segment || 'none'
+// 		};
+// 	},
+// 	validationSchema: Yup.object().shape({
+// 		due_by: Yup.string().required('date is required'),
+// 		title: Yup.string().required('list is required')
+// 	}),
+// 	handleSubmit(values, { setStatus, props }) {
+// 		// props.getUser(values);
+// 		// https://wunderlist2019.herokuapp.com/tasks/
+// 		axiosWithAuth()
+// 			.post(`https://wunderlist2019.herokuapp.com/tasks/add`, values)
+// 			.then((response) => {
+// 				console.log('CreateList.js: handleSubmit: post response', response);
+// 				localStorage.setItem('token', response.data.payload);
+// 			})
+// 			.catch((error) => console.log(error.response));
+// 		setStatus(values);
+// 	}
+// })(CreateList);
 
-export default FormikCreate;
+export default CreateList;
